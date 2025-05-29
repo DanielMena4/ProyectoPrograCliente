@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
+using ProyectoPrograCliente.Services;
 
 namespace ProyectoPrograCliente
 {
@@ -15,8 +17,18 @@ namespace ProyectoPrograCliente
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<MonsterService>(sp =>
+            {
+                var httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri("https://localhost:7117/api/monsterApi/")
+                };
+                return new MonsterService(httpClient);
+            });
+            builder.Services.AddSingleton<MainPage>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

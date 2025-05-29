@@ -1,24 +1,28 @@
-﻿namespace ProyectoPrograCliente
+﻿using ProyectoPrograCliente.Services;
+
+namespace ProyectoPrograCliente
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private readonly MonsterService _monsterService;
 
-        public MainPage()
+        public MainPage(MonsterService monsterService)
         {
             InitializeComponent();
+            _monsterService = monsterService;
+            LoadMonsters();
         }
-
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void LoadMonsters()
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            try
+            {
+                var monsters = await _monsterService.GetMonstersAsync();
+                monsterListView.ItemsSource = monsters;
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to load monsters: {ex.Message}", "OK");
+            }
         }
     }
 
