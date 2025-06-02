@@ -1,0 +1,42 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoPrograCliente.MainPage"
+             Title="Lista de Monstruos">
+
+    <StackLayout Padding="20" Spacing="10">
+        <Button Text="Agregar Monstruo" Clicked="OnAddMonsterClicked" />
+
+        <CollectionView x:Name="MonsterList"
+                SelectionMode="Single"
+                SelectionChanged="OnMonsterSelected"
+                Margin="0,10,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="*,Auto" BackgroundColor="#f2f2f2" Margin="0,5">
+
+                        <VerticalStackLayout>
+                            <Label Text="{Binding MonsterName}" FontAttributes="Bold" FontSize="16"/>
+                            <Label Text="{Binding MonsterType1}" FontSize="Small"/>
+                            <Label Text="ATK: {Binding MonsterAttack} / DEF: {Binding MonsterDefense}" FontSize="Micro"/>
+                        </VerticalStackLayout>
+
+                        <Button 
+                    Text="Eliminar" 
+                    BackgroundColor="Red" 
+                    TextColor="White"
+                    FontSize="14"
+                    WidthRequest="60"
+                    HeightRequest="40"
+                    Padding="0"
+                    Margin="10,0,0,0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Clicked="OnDeleteMonster"
+                    CommandParameter="{Binding}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>

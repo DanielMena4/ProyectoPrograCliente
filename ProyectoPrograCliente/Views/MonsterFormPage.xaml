@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoPrograCliente.MonsterFormPage"
+             Title="Formulario de Monstruo">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Entry Placeholder="Nombre" Text="{Binding Monster.MonsterName}" />
+            <Entry Placeholder="Tipo 1" Text="{Binding Monster.MonsterType1}" />
+            <Entry Placeholder="Tipo 2" Text="{Binding Monster.MonsterType2}" />
+
+            <Entry Placeholder="Ataque" Keyboard="Numeric" Text="{Binding Monster.MonsterAttack}" />
+            <Entry Placeholder="Ataque Especial" Keyboard="Numeric" Text="{Binding Monster.MonsterSpecialAttack}" />
+            <Entry Placeholder="Defensa" Keyboard="Numeric" Text="{Binding Monster.MonsterDefense}" />
+            <Entry Placeholder="Defensa Especial" Keyboard="Numeric" Text="{Binding Monster.MonsterSpecialDefense}" />
+            <Entry Placeholder="Velocidad" Keyboard="Numeric" Text="{Binding Monster.MonsterSpeed}" />
+            <Entry Placeholder="Vida Total" Keyboard="Numeric" Text="{Binding Monster.MonsterHealth}" />
+            <Entry Placeholder="Vida Actual" Keyboard="Numeric" Text="{Binding Monster.MonsterCurrentHealth}" />
+            <Entry Placeholder="URL del Sprite" Text="{Binding Monster.Sprite}" />
+
+            <Button Text="Guardar" Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
