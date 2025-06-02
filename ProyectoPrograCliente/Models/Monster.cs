@@ -21,5 +21,17 @@ namespace ProyectoPrograCliente.Models
         public int MonsterHealth { get; set; }
         public int MonsterCurrentHealth { get; set; }
         public string? Sprite { get; set; }
+        private const string BaseUrl = "https://localhost:7117/";
+        public string SpriteFullUrl
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Sprite))
+                return string.Empty;
+                var cleanedPath = Sprite.Replace("../", "");
+
+            return new Uri(new Uri(BaseUrl), cleanedPath).ToString();
+        }
+    }
     }
 }

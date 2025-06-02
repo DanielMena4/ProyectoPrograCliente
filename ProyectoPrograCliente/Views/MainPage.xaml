@@ -3,40 +3,52 @@
              x:Class="ProyectoPrograCliente.MainPage"
              Title="Lista de Monstruos">
 
-    <StackLayout Padding="20" Spacing="10">
-        <Button Text="Agregar Monstruo" Clicked="OnAddMonsterClicked" />
+    <Grid RowDefinitions="Auto,*" Padding="20">
+        <Button Text="Agregar Monstruo"
+                Clicked="OnAddMonsterClicked"
+                Grid.Row="0"
+                HorizontalOptions="Fill" />
 
         <CollectionView x:Name="MonsterList"
-                SelectionMode="Single"
-                SelectionChanged="OnMonsterSelected"
-                Margin="0,10,0,0">
+                        Grid.Row="1"
+                        SelectionMode="Single"
+                        SelectionChanged="OnMonsterSelected"
+                        Margin="0,10,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10" ColumnDefinitions="*,Auto" BackgroundColor="#f2f2f2" Margin="0,5">
+                    <Frame BorderColor="#cccccc" Margin="0,5" CornerRadius="8" HasShadow="False">
+                        <Grid ColumnDefinitions="100,*,Auto" Padding="10">
+                            <Image Source="{Binding SpriteFullUrl}" WidthRequest="80" HeightRequest="80" Aspect="AspectFit" />
+                            <VerticalStackLayout Grid.Column="1" Padding="10,0" Spacing="2">
+                                <Label Text="{Binding MonsterName}" FontAttributes="Bold" FontSize="16"/>
+                                <Label Text="{Binding MonsterType1}" FontSize="Small"/>
+                                <Label Text="{Binding MonsterType2}" FontSize="Small"/>
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterAttack, StringFormat='ATK: {0}'}" />
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterSpecialAttack, StringFormat='SATK: {0}'}" />
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterDefense, StringFormat='DEF: {0}'}" />
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterSpecialDefense, StringFormat='SDEF: {0}'}" />
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterSpeed, StringFormat='SPD: {0}'}" />
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterCurrentHealth, StringFormat='HP: {0}'}" />
+                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterHealth, StringFormat='Total HP: {0}'}" />
+                            </VerticalStackLayout>
 
-                        <VerticalStackLayout>
-                            <Label Text="{Binding MonsterName}" FontAttributes="Bold" FontSize="16"/>
-                            <Label Text="{Binding MonsterType1}" FontSize="Small"/>
-                            <Label Text="ATK: {Binding MonsterAttack} / DEF: {Binding MonsterDefense}" FontSize="Micro"/>
-                        </VerticalStackLayout>
-
-                        <Button 
-                    Text="Eliminar" 
-                    BackgroundColor="Red" 
-                    TextColor="White"
-                    FontSize="14"
-                    WidthRequest="60"
-                    HeightRequest="40"
-                    Padding="0"
-                    Margin="10,0,0,0"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"
-                    Clicked="OnDeleteMonster"
-                    CommandParameter="{Binding}" />
-                    </Grid>
+                            <Button 
+                                Grid.Column="2"
+                                Text="Eliminar"
+                                BackgroundColor="Red"
+                                TextColor="White"
+                                FontSize="14"
+                                WidthRequest="60"
+                                HeightRequest="40"
+                                Padding="0"
+                                Margin="10,0,0,0"
+                                VerticalOptions="Center"
+                                Clicked="OnDeleteMonster"
+                                CommandParameter="{Binding}" />
+                        </Grid>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-    </StackLayout>
+    </Grid>
 </ContentPage>
