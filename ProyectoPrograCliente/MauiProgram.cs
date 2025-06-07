@@ -14,6 +14,7 @@ namespace ProyectoPrograCliente
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("PressStart2P-Regular.ttf", "PixelFont");
                 });
 
             builder.Services.AddSingleton<MonsterService>(sp =>

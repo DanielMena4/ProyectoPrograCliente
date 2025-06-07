@@ -1,13 +1,22 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoPrograCliente.MainPage"
-             Title="Lista de Monstruos">
+             Title="🕹️ Lista de Monstruos"
+             BackgroundColor="#1e1e1e">
 
-    <Grid RowDefinitions="Auto,*" Padding="20">
-        <Button Text="Agregar Monstruo"
+    <Grid RowDefinitions="Auto,*" Padding="10">
+
+        <Button Text="➕ AGREGAR MONSTRUO"
                 Clicked="OnAddMonsterClicked"
                 Grid.Row="0"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                BackgroundColor="#3cba54"
+                TextColor="White"
+                FontAttributes="Bold"
+                FontFamily="PixelFont"
+                FontSize="14"
+                CornerRadius="0"
+                HeightRequest="45" />
 
         <CollectionView x:Name="MonsterList"
                         Grid.Row="1"
@@ -16,35 +25,93 @@
                         Margin="0,10,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="#cccccc" Margin="0,5" CornerRadius="8" HasShadow="False">
-                        <Grid ColumnDefinitions="100,*,Auto" Padding="10">
-                            <Image Source="{Binding SpriteFullUrl}" WidthRequest="80" HeightRequest="80" Aspect="AspectFit" />
-                            <VerticalStackLayout Grid.Column="1" Padding="10,0" Spacing="2">
-                                <Label Text="{Binding MonsterName}" FontAttributes="Bold" FontSize="16"/>
-                                <Label Text="{Binding MonsterType1}" FontSize="Small"/>
-                                <Label Text="{Binding MonsterType2}" FontSize="Small"/>
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterAttack, StringFormat='ATK: {0}'}" />
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterSpecialAttack, StringFormat='SATK: {0}'}" />
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterDefense, StringFormat='DEF: {0}'}" />
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterSpecialDefense, StringFormat='SDEF: {0}'}" />
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterSpeed, StringFormat='SPD: {0}'}" />
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterCurrentHealth, StringFormat='HP: {0}'}" />
-                                <Label FontSize="12" TextColor="Gray" Text="{Binding MonsterHealth, StringFormat='Total HP: {0}'}" />
+                    <Frame BackgroundColor="#2b2b2b"
+                           BorderColor="#00ffcc"
+                           CornerRadius="0"
+                           HasShadow="False"
+                           Margin="0,8">
+
+                        <Grid ColumnDefinitions="90,*,Auto"
+                              Padding="6"
+                              RowSpacing="4">
+                            <Image Source="{Binding SpriteFullUrl}"
+                                   WidthRequest="80"
+                                   HeightRequest="80"
+                                   Aspect="AspectFit"
+                                   VerticalOptions="Center" />
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Padding="8,0"
+                                                 Spacing="4">
+                                <Label Text="{Binding MonsterName}"
+                                       FontFamily="PixelFont"
+                                       FontSize="14"
+                                       TextColor="#ffffff" />
+
+                                <HorizontalStackLayout Spacing="4">
+                                    <Frame BackgroundColor="#333"
+                                           BorderColor="#00bfff"
+                                           Padding="2"
+                                           CornerRadius="0"
+                                           HasShadow="False">
+                                        <Label Text="{Binding MonsterType1}"
+                                               FontFamily="PixelFont"
+                                               FontSize="10"
+                                               TextColor="#00bfff" />
+                                    </Frame>
+                                    <Frame BackgroundColor="#333"
+                                           BorderColor="#ff4081"
+                                           Padding="2"
+                                           CornerRadius="0"
+                                           HasShadow="False">
+                                        <Label Text="{Binding MonsterType2}"
+                                               FontFamily="PixelFont"
+                                               FontSize="10"
+                                               TextColor="#ff4081" />
+                                    </Frame>
+                                </HorizontalStackLayout>
+
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="6" RowSpacing="2">
+                                    <Label FontSize="10" FontFamily="PixelFont" TextColor="#cccccc"
+                                           Text="{Binding MonsterAttack, StringFormat='ATK: {0}'}"
+                                           Grid.Row="0" Grid.Column="0" />
+                                    <Label FontSize="10" FontFamily="PixelFont" TextColor="#cccccc"
+                                           Text="{Binding MonsterSpecialAttack, StringFormat='SATK: {0}'}"
+                                           Grid.Row="0" Grid.Column="1" />
+
+                                    <Label FontSize="10" FontFamily="PixelFont" TextColor="#cccccc"
+                                           Text="{Binding MonsterDefense, StringFormat='DEF: {0}'}"
+                                           Grid.Row="1" Grid.Column="0" />
+                                    <Label FontSize="10" FontFamily="PixelFont" TextColor="#cccccc"
+                                           Text="{Binding MonsterSpecialDefense, StringFormat='SDEF: {0}'}"
+                                           Grid.Row="1" Grid.Column="1" />
+
+                                    <Label FontSize="10" FontFamily="PixelFont" TextColor="#cccccc"
+                                           Text="{Binding MonsterSpeed, StringFormat='SPD: {0}'}"
+                                           Grid.Row="2" Grid.Column="0" />
+                                    <Label FontSize="10" FontFamily="PixelFont" TextColor="#cccccc"
+                                           Text="{Binding MonsterCurrentHealth, StringFormat='HP: {0}'}"
+                                           Grid.Row="2" Grid.Column="1" />
+                                </Grid>
+
+                                <Label FontSize="10" FontFamily="PixelFont"
+                                       TextColor="#dddddd"
+                                       Text="{Binding MonsterHealth, StringFormat='Total HP: {0}'}"
+                                       Margin="0,4,0,0" />
                             </VerticalStackLayout>
 
-                            <Button 
-                                Grid.Column="2"
-                                Text="Eliminar"
-                                BackgroundColor="Red"
-                                TextColor="White"
-                                FontSize="14"
-                                WidthRequest="60"
-                                HeightRequest="40"
-                                Padding="0"
-                                Margin="10,0,0,0"
-                                VerticalOptions="Center"
-                                Clicked="OnDeleteMonster"
-                                CommandParameter="{Binding}" />
+                            <Button Grid.Column="2"
+                                    Text="🗑"
+                                    BackgroundColor="#ff0040"
+                                    TextColor="White"
+                                    FontFamily="PixelFont"
+                                    FontSize="14"
+                                    WidthRequest="40"
+                                    HeightRequest="40"
+                                    CornerRadius="0"
+                                    VerticalOptions="Center"
+                                    Clicked="OnDeleteMonster"
+                                    CommandParameter="{Binding}" />
                         </Grid>
                     </Frame>
                 </DataTemplate>

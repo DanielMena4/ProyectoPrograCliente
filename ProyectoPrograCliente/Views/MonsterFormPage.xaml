@@ -2,46 +2,75 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoPrograCliente.MonsterFormPage"
-             Title="Formulario Monstruo">
+             Title="🧾 Formulario Monstruo"
+             BackgroundColor="#1e1e1e">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="12">
 
-            <Label Text="Nombre" FontAttributes="Bold"/>
-            <Entry Text="{Binding Monster.MonsterName}" Placeholder="Nombre del monstruo"/>
+            <Label Text="NOMBRE" FontFamily="PixelFont" FontSize="12" TextColor="#00ffcc" />
+            <Entry Text="{Binding Monster.MonsterName}" Placeholder="Nombre del monstruo"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" PlaceholderColor="#888" HeightRequest="36" />
 
-            <Label Text="Tipo 1" FontAttributes="Bold"/>
-            <Entry Text="{Binding Monster.MonsterType1}" Placeholder="Tipo 1"/>
+            <Label Text="TIPO 1" FontFamily="PixelFont" FontSize="12" TextColor="#00bfff" />
+            <Entry Text="{Binding Monster.MonsterType1}" Placeholder="Tipo 1"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" PlaceholderColor="#888" HeightRequest="36" />
 
-            <Label Text="Tipo 2" FontAttributes="Bold"/>
-            <Entry Text="{Binding Monster.MonsterType2}" Placeholder="Tipo 2"/>
+            <Label Text="TIPO 2" FontFamily="PixelFont" FontSize="12" TextColor="#ff4081" />
+            <Entry Text="{Binding Monster.MonsterType2}" Placeholder="Tipo 2"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" PlaceholderColor="#888" HeightRequest="36" />
 
-            <Label Text="Ataque" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterAttack}" />
+            <Label Text="ATAQUE" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterAttack}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Ataque Especial" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterSpecialAttack}" />
+            <Label Text="ATAQUE ESPECIAL" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterSpecialAttack}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Defensa" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterDefense}" />
+            <Label Text="DEFENSA" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterDefense}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Defensa Especial" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterSpecialDefense}" />
+            <Label Text="DEFENSA ESPECIAL" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterSpecialDefense}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Velocidad" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterSpeed}" />
+            <Label Text="VELOCIDAD" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterSpeed}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Salud Total" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterHealth}" />
+            <Label Text="SALUD TOTAL" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterHealth}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Salud Actual" FontAttributes="Bold"/>
-            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterCurrentHealth}" />
+            <Label Text="SALUD ACTUAL" FontFamily="PixelFont" FontSize="12" TextColor="#dddddd" />
+            <Entry Keyboard="Numeric" Text="{Binding Monster.MonsterCurrentHealth}"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" HeightRequest="36" />
 
-            <Label Text="Sprite (URL o ruta)" FontAttributes="Bold"/>
-            <Entry Text="{Binding Monster.Sprite}" Placeholder="Ruta o URL de la imagen" />
+            <Label Text="SPRITE (URL O RUTA)" FontFamily="PixelFont" FontSize="12" TextColor="#ffaa00" />
+            <Entry Text="{Binding Monster.Sprite}" Placeholder="Ruta o URL de la imagen"
+                   FontFamily="PixelFont" FontSize="12"
+                   BackgroundColor="#2b2b2b" TextColor="White" PlaceholderColor="#888" HeightRequest="36" />
 
-            <Button Text="Guardar" Clicked="OnSaveClicked" />
-
+            <Button Text="GUARDAR"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#3cba54"
+                    TextColor="White"
+                    FontFamily="PixelFont"
+                    FontSize="14"
+                    HeightRequest="45"
+                    CornerRadius="0" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
