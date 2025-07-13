@@ -23,15 +23,16 @@ namespace ProyectoPrograCliente.Models
         public string? Sprite { get; set; }
         private const string BaseUrl = "https://localhost:7117/";
         public string SpriteFullUrl
-    {
-        get
         {
-            if (string.IsNullOrEmpty(Sprite))
-                return string.Empty;
-                var cleanedPath = Sprite.Replace("../", "");
+            get
+            {
+                if (string.IsNullOrWhiteSpace(MonsterName))
+                    return "placeholder.png";
 
-            return new Uri(new Uri(BaseUrl), cleanedPath).ToString();
+                string name = MonsterName.ToLowerInvariant().Trim();
+                return $"{name}_1.png";
+            }
         }
-    }
+
     }
 }
