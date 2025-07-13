@@ -64,7 +64,7 @@
                    BackgroundColor="#2b2b2b" TextColor="White" PlaceholderColor="#888" HeightRequest="36" />
 
             <Button Text="GUARDAR"
-                    Clicked="OnSaveClicked"
+                    Command="{Binding SaveCommand}" 
                     BackgroundColor="#3cba54"
                     TextColor="White"
                     FontFamily="PixelFont"

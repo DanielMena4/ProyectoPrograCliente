@@ -1,13 +1,14 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoPrograCliente.MainPage"
+             x:Name="RootPage"
              Title="🕹️ Lista de Monstruos"
              BackgroundColor="#1e1e1e">
 
     <Grid RowDefinitions="Auto,*" Padding="10">
 
         <Button Text="➕ AGREGAR MONSTRUO"
-                Clicked="OnAddMonsterClicked"
+                Command="{Binding AddMonsterCommand}"
                 Grid.Row="0"
                 HorizontalOptions="Fill"
                 BackgroundColor="#3cba54"
@@ -20,8 +21,10 @@
 
         <CollectionView x:Name="MonsterList"
                         Grid.Row="1"
+                        ItemsSource="{Binding Monsters}"
                         SelectionMode="Single"
-                        SelectionChanged="OnMonsterSelected"
+                        SelectionChangedCommand="{Binding SelectMonsterCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MonsterList}}"
                         Margin="0,10,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -110,7 +113,7 @@
                                     HeightRequest="40"
                                     CornerRadius="0"
                                     VerticalOptions="Center"
-                                    Clicked="OnDeleteMonster"
+                                    Command="{Binding BindingContext.DeleteMonsterCommand, Source={x:Reference RootPage}}"
                                     CommandParameter="{Binding}" />
                         </Grid>
                     </Frame>
