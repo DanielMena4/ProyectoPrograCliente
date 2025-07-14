@@ -8,12 +8,15 @@ namespace ProyectoPrograCliente.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly MonsterService _monsterService;
+    private readonly MonsterLocalService _monsterLocalService;
     private readonly INavigation _navigation;
 
-    public MainViewModel(MonsterService monsterService, INavigation navigation)
+    public MainViewModel(MonsterService monsterService, MonsterLocalService monsterLocalService, INavigation navigation)
     {
         _monsterService = monsterService;
+        _monsterLocalService = monsterLocalService;
         _navigation = navigation;
+
         LoadMonstersCommand.Execute(null);
     }
 
@@ -23,21 +26,41 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     async Task LoadMonstersAsync()
     {
-        var list = await _monsterService.GetMonstersAsync();
-        Monsters = new ObservableCollection<Monster>(list);
+        var localList = await _monsterLocalService.GetMonstersAsync();
+        Monsters = new ObservableCollection<Monster>(localList);
+
+        try
+        {
+            var apiList = await _monsterService.GetMonstersAsync();
+
+            if (apiList != null && apiList.Any())
+            {
+                await _monsterLocalService.DeleteAllAsync();
+                foreach (var monster in apiList)
+                {
+                    await _monsterLocalService.SaveMonsterAsync(monster);
+                }
+                Monsters = new ObservableCollection<Monster>(apiList);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al obtener desde API: {ex.Message}");
+        }
     }
+
 
     [RelayCommand]
     async Task AddMonsterAsync()
     {
-        await _navigation.PushAsync(new MonsterFormPage(_monsterService));
+        await _navigation.PushAsync(new MonsterFormPage(_monsterService, _monsterLocalService));
     }
 
     [RelayCommand]
     async Task SelectMonsterAsync(Monster selectedMonster)
     {
         if (selectedMonster is null) return;
-        await _navigation.PushAsync(new MonsterFormPage(_monsterService, selectedMonster));
+        await _navigation.PushAsync(new MonsterFormPage(_monsterService, _monsterLocalService, selectedMonster));
     }
 
     [RelayCommand]
@@ -47,8 +70,16 @@ public partial class MainViewModel : ObservableObject
         bool confirm = await Application.Current.MainPage.DisplayAlert("Eliminar", $"¿Eliminar a {monster.MonsterName}?", "Sí", "No");
         if (confirm)
         {
-            await _monsterService.DeleteMonsterAsync(monster.Id);
+            try
+            {
+                await _monsterService.DeleteMonsterAsync(monster.Id);
+            }
+            catch
+            {
+            }
+            await _monsterLocalService.DeleteMonsterAsync(monster);
             await LoadMonstersAsync();
         }
     }
 }
+

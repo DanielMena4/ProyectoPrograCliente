@@ -6,9 +6,10 @@ namespace ProyectoPrograCliente;
 
 public partial class MonsterFormPage : ContentPage
 {
-    public MonsterFormPage(MonsterService monsterService, Monster? monster = null)
+    public MonsterFormPage(MonsterService monsterService, MonsterLocalService monsterLocalService, Monster? monster = null)
     {
         InitializeComponent();
-        BindingContext = new MonsterFormViewModel(monsterService, Navigation, monster);
+
+        BindingContext = new MonsterFormViewModel(monsterService, monsterLocalService, Navigation, monster);
     }
 }

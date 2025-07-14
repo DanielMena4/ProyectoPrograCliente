@@ -9,14 +9,17 @@ public partial class MonsterFormViewModel : ObservableObject
 {
     private readonly MonsterService _monsterService;
     private readonly INavigation _navigation;
+    private readonly MonsterLocalService _monsterLocalService;
 
-    public MonsterFormViewModel(MonsterService monsterService, INavigation navigation, Monster? monster = null)
+    public MonsterFormViewModel(MonsterService monsterService, MonsterLocalService monsterLocalService, INavigation navigation, Monster? monster = null)
     {
         _monsterService = monsterService;
+        _monsterLocalService = monsterLocalService;
         _navigation = navigation;
         Monster = monster ?? new Monster();
         isEdit = monster != null;
     }
+
 
     [ObservableProperty]
     Monster monster;
@@ -26,9 +29,24 @@ public partial class MonsterFormViewModel : ObservableObject
     [RelayCommand]
     public async Task SaveAsync()
     {
-        bool result = isEdit
-            ? await _monsterService.UpdateMonsterAsync(Monster)
-            : await _monsterService.AddMonsterAsync(Monster);
+        bool result = false;
+
+        try
+        {
+            if (isEdit)
+            {
+                result = await _monsterService.UpdateMonsterAsync(Monster);
+            }
+            else
+            {
+                result = await _monsterService.AddMonsterAsync(Monster);
+            }
+        }
+        catch
+        {
+        }
+
+        await _monsterLocalService.SaveMonsterAsync(Monster);
 
         if (result)
         {
@@ -37,7 +55,9 @@ public partial class MonsterFormViewModel : ObservableObject
         }
         else
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Ocurrió un problema al guardar", "OK");
+            await Application.Current.MainPage.DisplayAlert("Aviso", "Guardado localmente. Se sincronizará cuando haya conexión.", "OK");
+            await _navigation.PopAsync();
         }
     }
+
 }

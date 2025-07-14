@@ -4,9 +4,9 @@ namespace ProyectoPrograCliente;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(MonsterService monsterService)
+    public MainPage(MonsterService monsterService, MonsterLocalService monsterLocalService)
     {
         InitializeComponent();
-        BindingContext = new MainViewModel(monsterService, Navigation);
+        BindingContext = new MainViewModel(monsterService, monsterLocalService, Navigation);
     }
 }

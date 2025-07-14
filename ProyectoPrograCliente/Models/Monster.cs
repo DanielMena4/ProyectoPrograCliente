@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace ProyectoPrograCliente.Models
 {
     public class Monster
     {
+        [PrimaryKey]
         public int Id { get; set; }
         public string? MonsterName { get; set; }
         public string? MonsterType1 { get; set; }
@@ -22,6 +24,7 @@ namespace ProyectoPrograCliente.Models
         public int MonsterCurrentHealth { get; set; }
         public string? Sprite { get; set; }
         private const string BaseUrl = "https://localhost:7117/";
+        [Ignore]
         public string SpriteFullUrl
         {
             get
@@ -29,7 +32,7 @@ namespace ProyectoPrograCliente.Models
                 if (string.IsNullOrWhiteSpace(MonsterName))
                     return "placeholder.png";
 
-                string name = MonsterName.ToLowerInvariant().Trim();
+                string name = MonsterName.ToLowerInvariant().Trim().Replace(" ", "");
                 return $"{name}_1.png";
             }
         }

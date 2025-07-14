@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
+﻿using System.IO;
+using Microsoft.Extensions.Logging.Debug;
+using ProyectoPrograCliente.ViewModels;
 
 namespace ProyectoPrograCliente
 {
@@ -25,11 +26,19 @@ namespace ProyectoPrograCliente
                 };
                 return new MonsterService(httpClient);
             });
+
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "monsters.db3");
+            builder.Services.AddSingleton(new MonsterLocalService(dbPath));
+
+            builder.Services.AddTransient<MainViewModel>(sp =>
+            {
+                var monsterService = sp.GetRequiredService<MonsterService>();
+                var monsterLocalService = sp.GetRequiredService<MonsterLocalService>();
+                return new MainViewModel(monsterService, monsterLocalService, null!);
+            });
+
             builder.Services.AddSingleton<MainPage>();
 
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
 
             return builder.Build();
         }

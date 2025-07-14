@@ -1,5 +1,4 @@
-﻿// Services/MonsterService.cs
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using ProyectoPrograCliente.Models;
 
 public class MonsterService
@@ -13,12 +12,27 @@ public class MonsterService
 
     public async Task<List<Monster>> GetMonstersAsync()
     {
-        return await _httpClient.GetFromJsonAsync<List<Monster>>("") ?? new();
+        try
+        {
+            var monsters = await _httpClient.GetFromJsonAsync<List<Monster>>("");
+            return monsters ?? new List<Monster>();
+        }
+        catch
+        {
+            return new List<Monster>();
+        }
     }
 
     public async Task<Monster?> GetMonsterAsync(int id)
     {
-        return await _httpClient.GetFromJsonAsync<Monster>($"{id}");
+        try
+        {
+            return await _httpClient.GetFromJsonAsync<Monster>($"{id}");
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public async Task<bool> AddMonsterAsync(Monster monster)
